@@ -12,7 +12,7 @@ Desarrollo de ejercicio prácticos y documentación referida al curso de Diseño
 
 ## Labs
 
-- [ ] Labs_1
+- [x] Labs_1
 - [ ] Labs_2
 - [ ] Labs_3
 - [ ] Labs_4
