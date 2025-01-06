@@ -1,0 +1,19 @@
+Objetivo
+
+Incluir los módulos VIO e ILA para control y debug del módulo Top.
+Los nombres en ROJO son puertos.
+i_reset es el reset del sistema, el cual pone a cero el contador e inicializa el shift register (SR).
+i_sw[0] controla el enable (1) del contador. En estado cero (0) detiene el funcionamiento sin alterar el estado
+actual del contador y del SR.
+El SR se desplaza únicamente cuando el contador llegó a algún límite R0-R3. La selección del límite se realiza
+con la señal i_sw[2:1].
+La elección del límite se puede realizar en cualquier momento del funcionamiento.
+i_sw[3] elige el color de los leds RGB.
+
+--------------------------------------------------------------------------------------------------------------
+Entregar
+
+Código verilog con la instancia del VIO e ILA.
+Testbench en verilog que valide el comportamiento del diseño sin los IP cores VIO e ILA.
+Implementarlo en la FPGA.
+Realizar capturas de pantallas que muestren las formas de onda del Testbench e ILA.
