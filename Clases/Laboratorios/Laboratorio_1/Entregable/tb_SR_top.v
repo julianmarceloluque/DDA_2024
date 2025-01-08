@@ -2,7 +2,7 @@
 //! @file tb_SR_top.v
 //! @author Julian Luque
 //! @date 07/01/2025
-//! @version Unit01 - Verilog
+//! @version Unit01 - Verilog - Lab01
 
 //! - Shift Register controlled by Switchs 
 //! - **ck_rst** is the system reset, which resets the counter and initializes the shiftregister (SR).
@@ -27,7 +27,6 @@ module tb_SR_top();
     parameter NB_COUNT  = `NB_COUNT; //! Number of bits of the counter (32)
     parameter NB_SW     = `NB_SW   ; //! Number of bits of the switch (4)
 
-
     wire [N_LEDS - 1 : 0] o_led    ; //! Leds
     wire [N_LEDS - 1 : 0] o_led_b  ; //! RGB Leds - Color Blue
     wire [N_LEDS - 1 : 0] o_led_g  ; //! RGB Leds - Color Green
@@ -38,7 +37,7 @@ module tb_SR_top();
     wire [NB_COUNT - 1 : 0] tb_count; //! Read internal counter
 
     //! Read the counter from module
-    assign tb_count = tb_SR_top.u_shiftleds.counter;
+    assign tb_count = tb_SR_top.u_SR_top.counter;
 
     //! Stimulus by initial
     initial begin: stimulus
@@ -50,7 +49,7 @@ module tb_SR_top();
         #100 i_reset = 1'b1  ;
         #100 i_sw[0] = 1'b1  ;
 
-    //force tb_SR_top.u_shiftleds.o_led = 4'b0001;
+    //force tb_SR_top.u_SR_top.o_led = 4'b0001;
 
         #1000000 i_sw[2:1]  = `NB_SEL'h1 ;
         #1000000 i_sw[2:1]  = `NB_SEL'h2 ;
@@ -63,14 +62,14 @@ module tb_SR_top();
     always #5 clock = ~clock;
 
     //! Instance of shiftleds module
-    shiftleds
+    SR_top
     #(
         .N_LEDS   (N_LEDS  ),
         .NB_SEL   (NB_SEL  ),
         .NB_COUNT (NB_COUNT),
         .NB_SW    (NB_SW   )
     )
-    u_shiftleds
+    u_SR_top
     (
         .o_led     (o_led  )  ,
         .o_led_b   (o_led_b)  ,
