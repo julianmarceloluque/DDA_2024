@@ -13,7 +13,7 @@ i_sw[3] elige el color de los leds RGB.
 --------------------------------------------------------------------------------------------------------------
 Entregar
 
-Código verilog con la instancia del VIO e ILA.
-Testbench en verilog que valide el comportamiento del diseño sin los IP cores VIO e ILA.
-Implementarlo en la FPGA.
-Realizar capturas de pantallas que muestren las formas de onda del Testbench e ILA.
+-> Código verilog con la instancia del VIO e ILA.
+-> Testbench en verilog que valide el comportamiento del diseño sin los IP cores VIO e ILA.
+-> Implementarlo en la FPGA.
+-> Realizar capturas de pantallas que muestren las formas de onda del Testbench e ILA.
