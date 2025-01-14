@@ -1,68 +1,68 @@
 module count
-#(
-    parameter NB_COUNTER    = 32,
-    parameter NB_SW         = 3
-)
-(
-    output                  o_valid,
+    #(
+        parameter NB_COUNTER    = 32,
+        parameter NB_SW         = 3
+    )
+    (
+        output                  o_valid,
 
-    input [NB_SW - 1 : 0]   i_sw    ,
-    input                   i_reset ,
-    input                   clock
-);
-    //localparam
-    localparam R0 = 2**(NB_COUNTER-10)-1;
-    localparam R1 = 2**(NB_COUNTER-11)-1;
-    localparam R2 = 2**(NB_COUNTER-12)-1;
-    localparam R3 = 2**(NB_COUNTER-13)-1;
+        input [NB_SW - 1 : 0]   i_sw    ,
+        input                   i_reset ,
+        input                   clock
+    );
+        //localparam
+        localparam R0 = 2**(NB_COUNTER-10)-1;
+        localparam R1 = 2**(NB_COUNTER-11)-1;
+        localparam R2 = 2**(NB_COUNTER-12)-1;
+        localparam R3 = 2**(NB_COUNTER-13)-1;
 
-    //var
-    wire [NB_COUNTER - 1 : 0] limit_ref;
+        //var
+        wire [NB_COUNTER - 1 : 0] limit_ref;
 
-    //Modelado del MUX
-    // NB_SW-1 : NB_SW-2 ---> Selecciona 2 bits continuos
-    assign limit_ref =  (i_sw[2:1] == 2'b00) ? R0 :
-                        (i_sw[2:1] == 2'b01) ? R1 :
-                        (i_sw[2:1] == 2'b10) ? R2 : R3;
+        //Modelado del MUX
+        // NB_SW-1 : NB_SW-2 ---> Selecciona 2 bits continuos
+        assign limit_ref =  (i_sw[2:1] == 2'b00) ? R0 :
+                            (i_sw[2:1] == 2'b01) ? R1 :
+                            (i_sw[2:1] == 2'b10) ? R2 : R3;
 
-    // reg [NB_COUNTER - 1 : 0] limit_ref;
-    // always@(*) begin
-    //     case (i_sw[2:1])
-    //         2'b00: limit_ref = R0; 
-    //         2'b01: limit_ref = R1; 
-    //         2'b10: limit_ref = R2; 
-    //         2'b11: limit_ref = R3; 
-    //         default: 
-    //     endcase
-    // end
+        // reg [NB_COUNTER - 1 : 0] limit_ref;
+        // always@(*) begin
+        //     case (i_sw[2:1])
+        //         2'b00: limit_ref = R0; 
+        //         2'b01: limit_ref = R1; 
+        //         2'b10: limit_ref = R2; 
+        //         2'b11: limit_ref = R3; 
+        //         default: 
+        //     endcase
+        // end
 
-    reg [NB_COUNTER - 1 : 0]    counter;
-    reg                         valid;
-    
+        reg [NB_COUNTER - 1 : 0]    counter;
+        reg                         valid;
+        
 
-    //Modelado del counter 32bits
-    always@(posedge clock) begin
-        if (i_reset) begin
-            counter <= {NB_COUNTER{1'b0}}; //0
-            valid   <= 1'b0;
-        end
-        else if (i_sw[0]) begin
-            if(counter >= limit_ref) begin
-                counter <= {NB_COUNTER{1'b0}};
-                valid   <= 1'b1;
-            end
-            else begin
-                counter <= counter + 1;
+        //Modelado del counter 32bits
+        always@(posedge clock) begin
+            if (i_reset) begin
+                counter <= {NB_COUNTER{1'b0}}; //0
                 valid   <= 1'b0;
             end
+            else if (i_sw[0]) begin
+                if(counter >= limit_ref) begin
+                    counter <= {NB_COUNTER{1'b0}};
+                    valid   <= 1'b1;
+                end
+                else begin
+                    counter <= counter + 1;
+                    valid   <= 1'b0;
+                end
+            end
+            else begin
+                counter <= counter;
+                valid   <= valid;
+            end
         end
-        else begin
-            counter <= counter;
-            valid   <= valid;
-        end
-    end
 
-    assign o_valid = valid;
+        assign o_valid = valid;
 
 endmodule
 
