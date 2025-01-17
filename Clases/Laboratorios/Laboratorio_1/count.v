@@ -11,10 +11,10 @@ module count
         input                   clock
     );
         // Localparam
-        localparam R0       = (2**(NB_COUNT-10))-1  ; //! Limit of counter
-        localparam R1       = (2**(NB_COUNT-9)) -1  ; //! Limit of counter
-        localparam R2       = (2**(NB_COUNT-8)) -1  ; //! Limit of counter
-        localparam R3       = (2**(NB_COUNT-7)) -1  ; //! Limit of counter
+        localparam R0       = (2**(NB_COUNT-25))-1  ; //! Limit of counter
+        localparam R1       = (2**(NB_COUNT-24)) -1  ; //! Limit of counter
+        localparam R2       = (2**(NB_COUNT-23)) -1  ; //! Limit of counter
+        localparam R3       = (2**(NB_COUNT-22)) -1  ; //! Limit of counter
 
         //var
         wire [NB_COUNT - 1 : 0] limit_ref;

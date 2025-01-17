@@ -65,8 +65,8 @@ module tb_top();
         
         // Set limit R0
         #10         i_sw[2:1]   = 2'b00 ; // Select R0 limit
-        #400000000   i_sw[3]     = 1     ; // Change RGB color
-        #400000000                       ; // Delay
+        #20000   i_sw[3]     = 1     ; // Change RGB color
+        #20000                       ; // Delay
         
         // Reset and enable the system
         #100        i_sw[3]     = 0     ; // Change to basic RGB color
@@ -76,8 +76,8 @@ module tb_top();
 
         // Set limit R1
         #10         i_sw[2:1]   = 2'b01 ; // Select R0 limit
-        #1000000000   i_sw[3]     = 1     ; // Change RGB color
-        #1000000000                       ; // Delay
+        #20000   i_sw[3]     = 1     ; // Change RGB color
+        #20000                       ; // Delay
         
         // Reset and enable the system
         #100        i_sw[3]     = 0     ; // Change to basic RGB color
@@ -87,8 +87,8 @@ module tb_top();
         
         // Set limit R2
         #10         i_sw[2:1]   = 2'b10 ; // Select R0 limit
-        #1000000000   i_sw[3]     = 1     ; // Change RGB color
-        #1000000000                       ; // Delay
+        #30000   i_sw[3]     = 1     ; // Change RGB color
+        #30000                       ; // Delay
         
         // Reset and enable the system
         #100        i_sw[3]     = 0     ; // Change to basic RGB color
@@ -98,8 +98,8 @@ module tb_top();
         
         // Set limit R3
         #10         i_sw[2:1]   = 2'b11 ; // Select R0 limit
-        #1000000000   i_sw[3]     = 1     ; // Change RGB color
-        #1000000000                       ; // Delay
+        #50000   i_sw[3]     = 1     ; // Change RGB color
+        #50000                       ; // Delay
         
         // Reset and enable the system
         #100        i_sw[3]     = 0     ; // Change to basic RGB color
@@ -108,10 +108,10 @@ module tb_top();
         #100        i_sw[0]     = 1     ; // Enable system        
         
         // Enable function test
-        #100        i_sw[0]     = 0     ; // The counter save the last state
+        #100      i_sw        = 4'b0000; // The counter save the last state
         
         // End simulation
-        #2000; // Wait 2 seconds
+        #20000; // Wait 2 seconds
         $finish;
 
     end
