@@ -1,3 +1,16 @@
+//! @title Wrapper Top Level
+//! @file wrapperr_top.v
+//! @author  Julian Luque
+//! @date 14/01/2024
+//! @version Unit01 - Verilog - Lab01
+
+//! - Shift Register controlled by Switchs 
+//! - **ck_rst** is the system reset, which resets the counter and initializes the SR_topister (SR).
+//! - **i_sw[0]** controls the enable (1) of the counter. The value (0) stops the systems without change of the current state of the counter and the SR.
+//! - The SR is moved only when the counter reached some limit **R0-R3**. 
+//! - The choice of the limit can be made at any time during operation.
+//! - **i_sw[3]** chooses the color of the RGB LEDs.
+
 module wrapper_top
     #(
         parameter NB_LEDS       = 4,
@@ -9,15 +22,15 @@ module wrapper_top
         output [NB_LEDS - 1 : 0]    o_led_b,
         output [NB_LEDS - 1 : 0]    o_led_g,
 
-        input [NB_SW    - 1 : 0]    h_sw,
-        input                       h_reset,
+        input [NB_SW    - 1 : 0]    i_sw,
+        input                       i_reset,
         input                       clock
     );
 
     //! Mux sw and reset
     // VIO e ILA
-    assign sw_to_top    =(selMux) ? sw_from_VIO : h_sw; // bus 4 bits
-    assign reset        =(selMux) ? ~reset_from_VIO : ~h_reset;
+    assign sw_to_top    =(selMux) ? sw_from_VIO : i_sw; // bus 4 bits
+    assign reset        =(selMux) ? ~reset_from_VIO : ~i_reset;
 
 
     //! Top Instance

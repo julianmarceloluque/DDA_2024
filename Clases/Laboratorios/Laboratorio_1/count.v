@@ -1,6 +1,6 @@
 module count
     #(
-        parameter NB_COUNTER    = 32,
+        parameter NB_COUNT    = 32,
         parameter NB_SW         = 3
     )
     (
@@ -10,14 +10,14 @@ module count
         input                   i_reset ,
         input                   clock
     );
-        //localparam
-        localparam R0 = 2**(NB_COUNTER-10)-1;
-        localparam R1 = 2**(NB_COUNTER-11)-1;
-        localparam R2 = 2**(NB_COUNTER-12)-1;
-        localparam R3 = 2**(NB_COUNTER-13)-1;
+        // Localparam
+        localparam R0       = (2**(NB_COUNT-10))-1  ; //! Limit of counter
+        localparam R1       = (2**(NB_COUNT-9)) -1  ; //! Limit of counter
+        localparam R2       = (2**(NB_COUNT-8)) -1  ; //! Limit of counter
+        localparam R3       = (2**(NB_COUNT-7)) -1  ; //! Limit of counter
 
         //var
-        wire [NB_COUNTER - 1 : 0] limit_ref;
+        wire [NB_COUNT - 1 : 0] limit_ref;
 
         //Modelado del MUX
         // NB_SW-1 : NB_SW-2 ---> Selecciona 2 bits continuos
@@ -36,19 +36,19 @@ module count
         //     endcase
         // end
 
-        reg [NB_COUNTER - 1 : 0]    counter;
+        reg [NB_COUNT - 1 : 0]    counter;
         reg                         valid;
         
 
         //Modelado del counter 32bits
         always@(posedge clock) begin
             if (i_reset) begin
-                counter <= {NB_COUNTER{1'b0}}; //0
+                counter <= {NB_COUNT{1'b0}}; //0
                 valid   <= 1'b0;
             end
             else if (i_sw[0]) begin
                 if(counter >= limit_ref) begin
-                    counter <= {NB_COUNTER{1'b0}};
+                    counter <= {NB_COUNT{1'b0}};
                     valid   <= 1'b1;
                 end
                 else begin

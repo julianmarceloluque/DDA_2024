@@ -11,6 +11,13 @@
 //! - The choice of the limit can be made at any time during operation.
 //! - **i_sw[3]** chooses the color of the RGB LEDs.
 
+// .probe_in0_0        (o_led)         ,
+// .probe_in1_0        (o_led_b)       ,
+// .probe_in2_0        (o_led_g)       ,
+// .probe_out0_0       (sw_from_VIO)   ,
+// .probe_out1_0       (reset_from_VIO),
+// .probe_out2_0       (selMux)   
+
 // Definitions
 `define N_LEDS 4
 `define NB_SEL 2

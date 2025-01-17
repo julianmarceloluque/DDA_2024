@@ -1,7 +1,7 @@
 module top 
     #(
         parameter NB_LEDS       = 4,
-        parameter NB_COUNTER    = 32,  
+        parameter NB_COUNT      = 32,  
         parameter NB_SW         = 4
     )
     (
@@ -19,7 +19,7 @@ module top
 
     count
     #(
-        .NB_COUNTER (NB_COUNTER ),
+        .NB_COUNT   (NB_COUNT ),
         .NB_SW      (NB_SW - 1  )
     )
     u_count
